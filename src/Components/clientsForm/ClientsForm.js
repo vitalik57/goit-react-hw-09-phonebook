@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useDispatch } from "react";
+import { useState } from "react";
 
 import { ClientsFormStyled } from "./ClientsFormStyled";
 import {
@@ -7,20 +7,20 @@ import {
   addClientOperation
   // deleteClientOperation
 } from "../../redux/clients/clientsReducer/clientsOperations";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllItems } from "../../redux/clients/clientsReducer/clientsSelector";
 const initialState = { name: "", number: "" };
 
 const ClientsForm = () => {
+  const dispatch = useDispatch();
   const [state, setState] = useState(initialState);
   const contacts = useSelector(getAllItems);
 
   // const [number, setNumber] = useState("");
-  const dispatch = useDispatch();
 
   const changeInput = e => {
     const { name, value } = e.target;
-    setState(prev => ({ prev, [name]: value }));
+    setState(prev => ({ ...prev, [name]: value }));
   };
   const addClient = async client => {
     dispatch(addClientOperation(client));

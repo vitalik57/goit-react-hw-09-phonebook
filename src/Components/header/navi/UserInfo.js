@@ -1,10 +1,14 @@
 import React from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/auth/authActions";
+import { displayNames, getAuthBoolean } from "../../../redux/auth/authSelector";
 
-const UserInfo = ({ displayName, auth }) => {
+const UserInfo = () => {
   const dispatch = useDispatch();
   const signOut = () => dispatch(logOut());
+  const displayName = useSelector(displayNames);
+  const auth = useSelector(getAuthBoolean);
+
   // с шопа содрал
   return auth ? (
     <>
@@ -17,8 +21,8 @@ const UserInfo = ({ displayName, auth }) => {
     </>
   ) : null;
 };
-const mapStateToProps = (state) => ({
-  displayName: state.auth.tokens.displayName,
-  auth: Boolean(state.auth.tokens.idToken),
-});
-export default connect(mapStateToProps)(UserInfo);
+// const mapStateToProps = state => ({
+//   displayName: state.auth.tokens.displayName,
+//   auth: Boolean(state.auth.tokens.idToken)
+// });
+export default UserInfo;

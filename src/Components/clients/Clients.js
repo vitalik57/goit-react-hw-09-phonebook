@@ -49,7 +49,7 @@ const Clients = () => {
       {error && <h2>{error}</h2>}
       {loader && <h2>Loading....</h2>}
       <ClientStyled>Phonebook</ClientStyled>
-      {/* <ClientsForm addClient={addClient} onCheckRepeated={onCheckRepeated} /> */}
+      <ClientsForm addClient={addClient} onCheckRepeated={onCheckRepeated} />
 
       <Filter doFilter={doFilter} filter={contacts.filter} />
       <h2>Contacts:</h2>
